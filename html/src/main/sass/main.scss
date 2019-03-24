@@ -1,0 +1,49 @@
+/*sier*/
+.grid-container {
+  display: inline-grid;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template: {
+    columns: [logo] 15% [title] 65% [date] 20%;
+    rows: [head-nav] 50% [sub-nav] 50%;
+  }
+
+  width: 100%;
+
+  .nav-grid-item-logo {
+    background: darkorange;
+    grid: {
+      column: {
+        start: logo;
+        end: title;
+      }
+      row: {
+        start: head-nav;
+        end: 3;
+      }
+    }
+  }
+
+  .nav-grid-item-end {
+    background: yellowgreen;
+    grid: {
+      column: {
+        start: date;
+      }
+    }
+  }
+
+  .to-right {
+    justify-self: end;
+  }
+
+  .to-center {
+    justify-self: center;
+  }
+
+  .to-stretch {
+    justify-self: stretch;
+  }
+}

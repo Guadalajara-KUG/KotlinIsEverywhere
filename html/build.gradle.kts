@@ -4,13 +4,14 @@ buildscript {
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
     }
 }
 
 plugins {
     id("kotlin2js") version "1.3.21"
     id("kotlinx-serialization") version "1.3.21"
+
+    id("com.github.salomonbrys.gradle.sass") version "1.2.0"
 }
 
 val kotlinVersion = "1.3.21"
@@ -20,10 +21,19 @@ version = "0.0.1"
 
 repositories {
     mavenCentral()
+    jcenter()
     maven("https://kotlin.bintray.com/kotlinx")
 }
 
 tasks {
+    sass {
+        local()
+    }
+
+    sassCompile {
+        outputDir = file("$buildDir/web")
+    }
+
     compileKotlin2Js {
         kotlinOptions {
             outputFile = "${sourceSets.main.get().output.resourcesDir}/output.js"
@@ -35,7 +45,7 @@ tasks {
         group = "build"
         description = "Unpack the Kotlin JavaScript standard library"
 
-        val outputDir = file("$buildDir/web")
+        val outputDir = file("$buildDir/$name")
 
         inputs.property("compileClasspath", configurations.compileClasspath.get())
         outputs.dir(outputDir)
@@ -69,7 +79,7 @@ tasks {
         }
     }
 
-    val assembleHTML by registering(Copy::class) {
+    val assembleWeb by registering(Copy::class) {
         group = "build"
         description = "Assemble the web application"
         includeEmptyDirs = false
@@ -81,13 +91,13 @@ tasks {
     }
 
     assemble {
-        dependsOn(assembleHTML)
+        dependsOn(assembleWeb)
     }
 }
 
 dependencies {
     implementation(kotlin("stdlib-js", version = kotlinVersion))
-    implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-runtime-js", version = "0.10.0")
+    implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-html-js", version = "0.6.12")
 
     testImplementation(kotlin("test-js", version = kotlinVersion))
 }

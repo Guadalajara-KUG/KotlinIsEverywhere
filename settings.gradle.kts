@@ -25,3 +25,4 @@ pluginManagement {
 
 include(":jvm")
 include(":js")
+include(":html")
