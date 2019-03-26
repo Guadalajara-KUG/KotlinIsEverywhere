@@ -35,7 +35,7 @@ tasks {
         group = "build"
         description = "Unpack the Kotlin JavaScript standard library"
 
-        val outputDir = file("$buildDir/web")
+        val outputDir = file("$buildDir/$name")
 
         inputs.property("compileClasspath", configurations.compileClasspath.get())
         outputs.dir(outputDir)
@@ -62,6 +62,7 @@ tasks {
                     into(outputDir)
                     include {
                         val path = it.path
+
                         path.endsWith(".js") || (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
                     }
                 }
@@ -69,7 +70,7 @@ tasks {
         }
     }
 
-    val assembleHTML by registering(Copy::class) {
+    val assembleWeb by registering(Copy::class) {
         group = "build"
         description = "Assemble the web application"
         includeEmptyDirs = false
@@ -77,11 +78,11 @@ tasks {
         from(sourceSets.main.get().output) {
             exclude("**/*.kjsm")
         }
-        into("$buildDir/web")
+        into("$buildDir/js")
     }
 
     assemble {
-        dependsOn(assembleHTML)
+        dependsOn(assembleWeb)//, cleanUnpacked)
     }
 }
 

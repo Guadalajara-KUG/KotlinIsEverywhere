@@ -41,7 +41,7 @@ tasks {
         }
     }
 
-    val unpackKotlinJsStdlib by registering {
+    val unpackKotlinJsStdlib1 by registering {
         group = "build"
         description = "Unpack the Kotlin JavaScript standard library"
 
@@ -79,19 +79,19 @@ tasks {
         }
     }
 
-    val assembleWeb by registering(Copy::class) {
+    val assembleHTML by registering(Copy::class) {
         group = "build"
         description = "Assemble the web application"
         includeEmptyDirs = false
-        from(unpackKotlinJsStdlib)
+        from(unpackKotlinJsStdlib1)
         from(sourceSets.main.get().output) {
             exclude("**/*.kjsm")
         }
-        into("$buildDir/web")
+        into("$buildDir/html")
     }
 
     assemble {
-        dependsOn(assembleWeb)
+        dependsOn(sassCompile, assembleHTML)
     }
 }
 

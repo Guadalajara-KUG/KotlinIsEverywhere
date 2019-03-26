@@ -10,6 +10,12 @@
 rootProject.name = "KotlinIsEverywhere"
 
 pluginManagement {
+    repositories {
+        maven("https://repo.spring.io/snapshot")
+        maven("https://repo.spring.io/milestone")
+        gradlePluginPortal()
+    }
+
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == "kotlin2js") {
@@ -19,10 +25,17 @@ pluginManagement {
             if (requested.id.id == "kotlinx-serialization") {
                 useModule("org.jetbrains.kotlin:kotlin-serialization:${requested.version}")
             }
+
+            if (requested.id.id == "org.springframework.boot") {
+                useModule("org.springframework.boot:spring-boot-gradle-plugin:${requested.version}")
+            }
         }
     }
 }
 
-include(":jvm")
 include(":js")
 include(":html")
+include(":express")
+include(":jvm")
+include(":boot")
+include(":jaxrx")
