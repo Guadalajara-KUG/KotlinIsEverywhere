@@ -36,6 +36,7 @@ pluginManagement {
 include(":js")
 include(":html")
 include(":express")
+include(":react-app")
 include(":jvm")
 include(":boot")
 include(":jaxrx")
