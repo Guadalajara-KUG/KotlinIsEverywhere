@@ -1,0 +1,27 @@
+{
+  "name": "@cloud-clusterer/simple-gl",
+  "author": "Chris Barbour <chris.barbour03@gmail.com>",
+  "version": "2.0.0",
+  "description": "A thin wrapper over webgl",
+  "main": "bin/build/simple-gl.js",
+  "scripts": {
+    "build": " webpack && shx rm -rf bin/build/kotlin-test*",
+    "test": "mocha bin/test"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloud-clusterer/simple-gl.git"
+  },
+  "dependencies": {
+    "kotlin": "^1.2.50"
+  },
+  "devDependencies": {
+    "@jetbrains/kotlin-webpack-plugin": "^1.2.7",
+    "kotlin-test": "^1.2.50",
+    "mocha": "^5.2.0",
+    "shx": "^0.3.1",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  }
+}

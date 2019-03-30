@@ -1,0 +1,5 @@
+node_modules
+bin
+npm-debug.log
+test-results.xml
+.idea/workspace.xml

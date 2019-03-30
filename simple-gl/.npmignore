@@ -1,0 +1,7 @@
+test
+*.html
+*.log
+*.xml
+webpack.config.js
+build/test
+build/bundle
